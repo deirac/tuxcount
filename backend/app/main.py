@@ -6,6 +6,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.database import engine, SessionLocal  # Importamos engine para verificar conexión
 
+
+from app.api.endpoints import auth
+from app.api.deps import get_current_user
+
+
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
@@ -16,6 +21,10 @@ app = FastAPI(
     description="Backend para gestión de finanzas del hogar",
     version="1.0.0"
 )
+
+# Ruta de autenticaciones.
+app.include_router(auth.router)
+
 
 # Configuración de CORS (Cross-Origin Resource Sharing)
 # Esto permite que tu frontend (React) se comunique con el backend

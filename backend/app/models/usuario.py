@@ -23,3 +23,14 @@ class Usuario(Base):
     metas_ahorro = relationship("MetaAhorro", back_populates="usuario", cascade="all, delete-orphan")
     presupuestos = relationship("Presupuesto", back_populates="usuario", cascade="all, delete-orphan")
     plantillas_fijas = relationship("PlantillaFijo", back_populates="usuario", cascade="all, delete-orphan")
+
+    @staticmethod
+    def hash_password(password: str) -> str:
+        from passlib.context import CryptContext
+        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        return pwd_context.hash(password)
+
+    def verify_password(self, password: str) -> bool:
+        from passlib.context import CryptContext
+        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        return pwd_context.verify(password, self.password_hash)

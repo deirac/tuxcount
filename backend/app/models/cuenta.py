@@ -22,14 +22,23 @@ class Cuenta(Base):
 
     # Relaciones
     usuario = relationship("Usuario", back_populates="cuentas")
-    transacciones = relationship("Transaccion", back_populates="cuenta", cascade="all, delete-orphan")
-    # Relación para transferencias (cuando es cuenta destino)
+    
+    transacciones = relationship(
+        "Transaccion",
+        foreign_keys="[Transaccion.cuenta_id]",  
+        back_populates="cuenta",
+        cascade="all, delete-orphan"
+    )
+
     transferencias_recibidas = relationship(
         "Transaccion",
         foreign_keys="[Transaccion.transferencia_destino_cuenta_id]",
         back_populates="cuenta_destino"
     )
+
     # Relación con deudas (cuenta asociada)
     deudas = relationship("Deuda", back_populates="cuenta_asociada")
     # Relación con metas de ahorro
     metas = relationship("MetaAhorro", back_populates="cuenta")
+
+    plantillas_fijas = relationship("PlantillaFijo", back_populates="cuenta", cascade="all, delete-orphan")

@@ -28,19 +28,35 @@ class Transaccion(Base):
     # Usuario
     usuario = relationship("Usuario", back_populates="transacciones")
     
-    # Cuenta origen (para ingresos/gastos/transferencias salientes)
-    cuenta = relationship("Cuenta", foreign_keys=[cuenta_id], back_populates="transacciones")
-    
     # Categoría (para ingresos y gastos)
     categoria = relationship("Categoria", back_populates="transacciones")
     
-    # Cuenta destino (solo para transferencias)
+    # Cuentas
+    cuenta = relationship(
+        "Cuenta",
+        foreign_keys=[cuenta_id],  # <-- Especificado
+        back_populates="transacciones"
+    )
+
     cuenta_destino = relationship(
         "Cuenta",
-        foreign_keys=[transferencia_destino_cuenta_id],
+        foreign_keys=[transferencia_destino_cuenta_id],  # <-- Especificado
         back_populates="transferencias_recibidas"
     )
 
     # Relaciones con otras tablas (opcionales, se agregarán cuando existan)
-    pago_deuda = relationship("PagoDeuda", back_populates="transaccion", uselist=False)
-    aporte_ahorro = relationship("AporteAhorro", back_populates="transaccion", uselist=False)
+        # Relación con PagoDeuda (uno a uno, opcional)
+    pago_deuda = relationship(
+        "PagoDeuda",
+        back_populates="transaccion",
+        uselist=False,          # Una transacción puede tener un solo pago deuda asociado
+        cascade="all, delete-orphan"
+    )
+
+    # Relación con AporteAhorro (uno a uno, opcional)
+    aporte_ahorro = relationship(
+        "AporteAhorro",
+        back_populates="transaccion",
+        uselist=False,
+        cascade="all, delete-orphan"
+    )

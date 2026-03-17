@@ -18,4 +18,8 @@ class PagoDeuda(Base):
 
     # Relaciones
     deuda = relationship("Deuda", back_populates="pagos")
-    transaccion = relationship("Transaccion", backref="pago_deuda", uselist=False)
+    transaccion = relationship(
+        "Transaccion",
+        back_populates="pago_deuda",   
+        uselist=False                   
+    )
