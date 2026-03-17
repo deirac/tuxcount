@@ -1,0 +1,19 @@
+# --- BACKEND (FastAPI + MySQL/TiDB) ---
+backend/.env
+backend/__pycache__/
+backend/venv/
+backend/.venv/
+backend/*.py[cod]
+
+# --- FRONTEND (React/Vue/Next.js) ---
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/dist/
+frontend/build/
+
+# --- GENERAL ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
