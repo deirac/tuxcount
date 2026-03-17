@@ -15,7 +15,7 @@ class Cuenta(Base):
         nullable=False
     )
     saldo_inicial = Column(Numeric(10, 2), default=0)
-    moneda = Column(String(3), default="MXN")
+    moneda = Column(String(3), default="COP")
     fecha_apertura = Column(Date, nullable=False)
     notas = Column(Text, nullable=True)
     incluir_en_patrimonio = Column(Boolean, default=True)
