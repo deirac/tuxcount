@@ -36,6 +36,7 @@ Se ha completado la configuración inicial del backend y se han implementado los
 
 ## 📁 Estructura del proyecto (backend)
 
+```text 
 backend/
 ├── app/
 │ ├── init.py
@@ -53,7 +54,7 @@ backend/
 ├── .env # Variables de entorno (no versionado)
 ├── requirements.txt
 └── venv/ # Entorno virtual
-
+```
 
 ---
 
